@@ -7,7 +7,7 @@
 */
 
 "use strict";
-
+console.log("Coucou");
 /**
  * Retourne le nom de l'hotel sélectionné par le visiteur
  * @returns {String} Nom de l'hotêl ou "0" si pas de sélection

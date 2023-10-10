@@ -16,6 +16,100 @@
 
     <!-- FORMULAIRE DE RESERVATION -->
     <!-- au cas ou t'aurais pas compris place ton fromulaire ici. A+ Manfred -->
+    <form id="Formulaire" action="https://kode.ch/getpost/" method="post">
+        <ul>
+            <li>
+                <label for="lis_hotel">Hotel</label>
+                <select name="lis_hotel" id="lis_hotel">
+                    <!--option[value="$.jpg{arrière-plan $}*10-->8
+                    <option value="0" selected>-- Sélectionnez un hôtel --</option>
+                    <option value="City">Hôtel City</option>
+                    <option value="National">Hôtel National</option>
+                    <option value="Midi">Hôtel Le Midi</option>
+                    <option value="Victoria">Hôtel Victoria</option>
+                </select>
+            </li>
+            <li>
+                <label for="txt_nbrChambre">Nombre de chambre</label>
+                <input id="txt_nbrChambre" name="txt_nbrChambre" type="text" value="" autofocus>
+            </li>
+            <li>
+                <fieldset>
+                    <legend>Type de chambre</legend>
+                    <div>
+                    <label>
+                        <input type="radio" name="opt_type_chambre" value="standard simple">
+                        <span>Standard simple</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="radio" name="opt_type_chambre" value="standard double">
+                        <span>Standard Double</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="radio" name="opt_type_chambre" value="supérieure simple">
+                        <span>Supérieur simple</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="radio" name="opt_type_chambre" value="supérieure double">
+                        <span>Supérieur double</span>
+                    </label>
+                    </div>
+                </fieldset>
+            </li>
+            <li>
+                <fieldset>
+                    <legend>Option disponible</legend>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="petit-dej" value="Petit déjeuner">
+                        <span>Petit déjeuner</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="tv" value="TV">
+                        <span>TV</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="journaux" value="Journaux">
+                        <span>Journaux</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="ordinateurs" value="Ordinateurs">
+                        <span>Ordinateurs</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="wifi" value="Accès Wifi">
+                        <span>Accès Wifi</span>
+                    </label>
+                    </div>
+                    <div>
+                    <label>
+                        <input type="checkbox" name="animaux" value="Animaux de compagnie">
+                        <span>Animaux de compagnie</span>
+                    </label>
+                    </div>
+                </fieldset>
+            </li>
+            <li>
+                <button class="reset" type="reset">Effacer</button>
+                <button class="envoie" type="submit">Réserver</button>
+            </li>
+        </ul>
+    </form>
+
 </div>
 
 <!-- RESERVATION -->
