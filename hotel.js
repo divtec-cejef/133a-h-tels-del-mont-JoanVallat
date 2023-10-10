@@ -31,7 +31,7 @@ function getHotel() {
  * @returns {Number} Nombre de chambres ou NaN (Not A Number)
  */
 function getNbChambre() {
-
+    return isNaN(nbChambre);
 }
 
 /**
@@ -47,7 +47,7 @@ function getChambre() {
  * @returns {Array} tableau des éléments checkbox cochés
  */
 function getOptions() {
-
+    return formulaire.querySelectorall("input:checked")
 }
 
 /**
@@ -76,3 +76,8 @@ function afficheConfirmation() {
 function reserver(event) {
 alert("Coucou");
 }
+
+
+//Affecte la fonction reserver à l'envoi du formRect
+//formRect.onsubmit = miseAJour; //Pas de parenthèses
+formulaire.addEventListener('submit', reserver);
