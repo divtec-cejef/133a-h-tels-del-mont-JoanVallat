@@ -31,7 +31,7 @@ function getHotel() {
  * @returns {Number} Nombre de chambres ou NaN (Not A Number)
  */
 function getNbChambre() {
-    return isNaN(nbChambre);
+    return isNaN(nbChambre.value) ? NaN : parseInt(nbChambre.value)
 }
 
 /**
@@ -47,7 +47,13 @@ function getChambre() {
  * @returns {Array} tableau des éléments checkbox cochés
  */
 function getOptions() {
-    return formulaire.querySelectorall("input:checked")
+    let tableau = []
+    let coche = formulaire.querySelectorAll('input[type=checkbox]:checked');
+
+    coche.forEach(function(coche) {
+        tableau.push(coche.value);
+    });
+    return tableau;
 }
 
 /**
@@ -74,10 +80,16 @@ function afficheConfirmation() {
  * @param event Objet représentant l'événement
  */
 function reserver(event) {
-alert("Coucou");
+    event.preventDefault();
+    alert(getHotel());
+    alert(getNbChambre());
+    alert(getChambre());
+
+    let tableau = getOptions();
+    for (let i = 0; i < tableau.length; i++) {
+        console.log(tableau[i]);
+    }
 }
 
-
-//Affecte la fonction reserver à l'envoi du formRect
-//formRect.onsubmit = miseAJour; //Pas de parenthèses
+//Affecte la fonction "réserver" à l'envoi du formulaire
 formulaire.addEventListener('submit', reserver);
