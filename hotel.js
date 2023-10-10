@@ -7,13 +7,23 @@
 */
 
 "use strict";
-console.log("Coucou");
+//console.log("Coucou"); Controle de liaison OK
+
+/*Récuperation des éléments*/
+const formulaire = document.getElementById('formulaire');
+const listeHotel = document.getElementById('lis_hotel');
+const nbChambre = document.getElementById('txt_nbrChambre');
+
+console.log(formulaire,listeHotel,nbChambre)
 /**
  * Retourne le nom de l'hotel sélectionné par le visiteur
  * @returns {String} Nom de l'hotêl ou "0" si pas de sélection
  */
 function getHotel() {
-
+    if (listeHotel.value === "0") {
+        return "0";
+    }
+    return listeHotel.value;
 }
 
 /**
@@ -29,7 +39,7 @@ function getNbChambre() {
  * @returns {String} Type de chambre ou ""
  */
 function getChambre() {
-
+    return  formulaire.querySelector('[name="opt_type_chambre"]:checked').value;
 }
 
 /**
@@ -64,5 +74,5 @@ function afficheConfirmation() {
  * @param event Objet représentant l'événement
  */
 function reserver(event) {
-
+alert("Coucou");
 }
