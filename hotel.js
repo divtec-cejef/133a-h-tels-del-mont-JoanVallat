@@ -39,7 +39,12 @@ function getNbChambre() {
  * @returns {String} Type de chambre ou ""
  */
 function getChambre() {
-    return  formulaire.querySelector('[name="opt_type_chambre"]:checked').value;
+    let typeChambre = formulaire.querySelector('[name="opt_type_chambre"]:checked');
+
+    if (typeChambre === null) {
+        return ""
+    }
+    return  typeChambre.value
 }
 
 /**
@@ -47,13 +52,7 @@ function getChambre() {
  * @returns {Array} tableau des éléments checkbox cochés
  */
 function getOptions() {
-    let tableau = []
-    let coche = formulaire.querySelectorAll('input[type=checkbox]:checked');
-
-    coche.forEach(function(coche) {
-        tableau.push(coche.value);
-    });
-    return tableau;
+ return formulaire.querySelectorAll('input[name="check_option"]:checked');
 }
 
 /**
@@ -65,6 +64,25 @@ function getOptions() {
  */
 function valideSaisie() {
 
+    let erreur = "";
+    //Test l'hôtel
+    if (getHotel() === "0") {
+        erreur += "Veuillez choisir un hotel\n";
+    }
+
+    //Test le nombre de chambre
+    let nbChambre = getNbChambre()
+    if (isNaN(nbChambre) || nbChambre < 1 || nbChambre > 12){
+        erreur += "Veuillez choisir un nombre de chambre entre 1 et 12\n";
+    }
+
+    //Test le type de chambre
+    if (getChambre() === "") {
+        erreur += "Veuillez choisir un type de chambre\n";
+    }
+
+    //Renvoie les erreurs
+    return erreur;
 }
 
 /**
@@ -81,13 +99,14 @@ function afficheConfirmation() {
  */
 function reserver(event) {
     event.preventDefault();
-    alert(getHotel());
-    alert(getNbChambre());
-    alert(getChambre());
+    let erreurs = valideSaisie()
+    if (erreurs !== "") {
+        alert(erreurs)
+        return
+    }
 
-    let tableau = getOptions();
-    for (let i = 0; i < tableau.length; i++) {
-        console.log(tableau[i]);
+    for (let option of getOptions()) {
+       alert(option.value)
     }
 }
 
