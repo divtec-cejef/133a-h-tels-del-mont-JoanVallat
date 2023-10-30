@@ -107,7 +107,7 @@ function afficheConfirmation() {
     h2NomHotel.innerText = getHotel();
 
     //Affiche le nombre de chambre
-    nbChambreConfirmation.innerText = getNbChambre();
+    nbChambreConfirmation.innerText = getNbChambre().toString();
 
     //Affiche le type de chambre
     typeChambreConfirmation.innerText = getChambre();
@@ -115,12 +115,11 @@ function afficheConfirmation() {
     //Liste les options choisies et les affiche (vide au départ)
     optionConfirmation.innerHTML = "";
 
-
     for (let option of getOptions()) {
         optionConfirmation.innerHTML += "<li>" +option.value+ "</li>";
     }
 
-
+    //Affiche la div de confirmation
     divConfirmation.style.display = "block"
 }
 
@@ -130,10 +129,14 @@ function afficheConfirmation() {
  * @param event Objet représentant l'événement
  */
 function reserver(event) {
+    //Stop l'envoie du formulaire
     event.preventDefault();
+
+    //Vide la div des message d'erreur et la cache
     divMessage.innerHTML = "";
     divMessage.style.display = "none";
 
+    //Contrôle de saisie et affichage d'erreur
     let erreurs = valideSaisie()
     if (erreurs) {
         divMessage.innerHTML = "<ul>" + erreurs + "</ul>";
@@ -142,11 +145,15 @@ function reserver(event) {
         return
     }
 
-
+    //Affiche la confirmation si tout est ok
     afficheConfirmation()
-
-
 }
 
 //Affecte la fonction "réserver" à l'envoi du formulaire
 formulaire.addEventListener('submit', reserver);
+
+//En cas de reset, cache les div de confirmation et d'erreur
+formulaire.addEventListener("reset",function(){
+    divMessage.style.display = "none";
+    divConfirmation.style.display = "none";
+})
