@@ -1,10 +1,10 @@
 ﻿/**
-* @author      Steve Fallet <steve.fallet@divtec.ch>
-* @version     1.0
-* @since       2023-10-09
-*
-* http://usejsdoc.org/
-*/
+ * @author      Steve Fallet <steve.fallet@divtec.ch>
+ * @version     1.0
+ * @since       2023-10-09
+ *
+ * http://usejsdoc.org/
+ */
 
 "use strict";
 //console.log("Coucou"); Controle de liaison OK
@@ -13,8 +13,18 @@
 const formulaire = document.getElementById('formulaire');
 const listeHotel = document.getElementById('lis_hotel');
 const nbChambre = document.getElementById('txt_nbrChambre');
+const divMessage = document.getElementById('message');
 
-console.log(formulaire,listeHotel,nbChambre)
+//Récupération des éléments dans la div de confirmation
+const divConfirmation = document.getElementById("reservation")
+const imageConfirmation = document.getElementById("photo");
+const h2NomHotel = document.querySelector("h2");
+const nbChambreConfirmation = document.getElementById("chambre_nombre");
+const typeChambreConfirmation = document.getElementById("chambre_type");
+const optionConfirmation = document.getElementById("options");
+
+
+console.log(formulaire,listeHotel,nbChambre,divMessage)
 /**
  * Retourne le nom de l'hotel sélectionné par le visiteur
  * @returns {String} Nom de l'hotêl ou "0" si pas de sélection
@@ -52,7 +62,7 @@ function getChambre() {
  * @returns {Array} tableau des éléments checkbox cochés
  */
 function getOptions() {
- return formulaire.querySelectorAll('input[name="check_option"]:checked');
+    return formulaire.querySelectorAll('input[name="check_option"]:checked');
 }
 
 /**
@@ -67,18 +77,18 @@ function valideSaisie() {
     let erreur = "";
     //Test l'hôtel
     if (getHotel() === "0") {
-        erreur += "Veuillez choisir un hotel\n";
+        erreur += "<li>Veuillez choisir un hotel</li>";
     }
 
     //Test le nombre de chambre
     let nbChambre = getNbChambre()
     if (isNaN(nbChambre) || nbChambre < 1 || nbChambre > 12){
-        erreur += "Veuillez choisir un nombre de chambre entre 1 et 12\n";
+        erreur += "<li>Veuillez choisir un nombre de chambre entre 1 et 12</li>";
     }
 
     //Test le type de chambre
     if (getChambre() === "") {
-        erreur += "Veuillez choisir un type de chambre\n";
+        erreur += "<li>Veuillez choisir un type de chambre</li>";
     }
 
     //Renvoie les erreurs
@@ -90,6 +100,28 @@ function valideSaisie() {
  */
 function afficheConfirmation() {
 
+    //Affiche l'image de l'hotel
+    imageConfirmation.src = "images/" + getHotel().toLowerCase() + ".jpg";
+
+    //Affiche le nom de l'hotêl
+    h2NomHotel.innerText = getHotel();
+
+    //Affiche le nombre de chambre
+    nbChambreConfirmation.innerText = getNbChambre();
+
+    //Affiche le type de chambre
+    typeChambreConfirmation.innerText = getChambre();
+
+    //Liste les options choisies et les affiche (vide au départ)
+    optionConfirmation.innerHTML = "";
+
+
+    for (let option of getOptions()) {
+        optionConfirmation.innerHTML += "<li>" +option.value+ "</li>";
+    }
+
+
+    divConfirmation.style.display = "block"
 }
 
 /**
@@ -99,15 +131,21 @@ function afficheConfirmation() {
  */
 function reserver(event) {
     event.preventDefault();
+    divMessage.innerHTML = "";
+    divMessage.style.display = "none";
+
     let erreurs = valideSaisie()
-    if (erreurs !== "") {
-        alert(erreurs)
+    if (erreurs) {
+        divMessage.innerHTML = "<ul>" + erreurs + "</ul>";
+        divMessage.style.display = "block";
+        divConfirmation.display = "none"
         return
     }
 
-    for (let option of getOptions()) {
-       alert(option.value)
-    }
+
+    afficheConfirmation()
+
+
 }
 
 //Affecte la fonction "réserver" à l'envoi du formulaire
